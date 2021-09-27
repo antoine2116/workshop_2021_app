@@ -18,6 +18,11 @@ app.get('/services', (req, res) => {
     res.render('pages/services')
 })
 
+app.get('/service/addService', (req, res) => {
+    res.render('pages/addService')
+})
+
+
 app.get('/updates', (req, res) => {
     res.render('pages/updates')
 })
