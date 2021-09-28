@@ -27,6 +27,14 @@ app.get('/updates', (req, res) => {
     res.render('pages/updates')
 })
 
+app.get('/services/addService', (req, res) => {
+    res.render('pages/addService')
+})
+
+app.get('/services/editService', (req, res) => {
+    res.render('pages/editService')
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
