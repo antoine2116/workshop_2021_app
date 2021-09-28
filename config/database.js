@@ -1,8 +1,8 @@
 // config/database.js
 module.exports = {
     HOST: 'localhost',
-    USER: 'ilias',
-    PASSWORD: 'mfu08vjv',
+    USER: 'workshop_db',
+    PASSWORD: 'workshop_db',
     DB: 'workshop',
     DIALECT: 'mysql',
     POOL: {
