@@ -139,6 +139,8 @@ exports.signup = async function (req, res){
 }
 
 exports.verifyAuth = async function(req, res){
+    res.removeHeader('Transfer-Encoding');
+    res.removeHeader('X-Powered-By');
     if(req.session.user){
         return true
     }else{

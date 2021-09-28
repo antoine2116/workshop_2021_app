@@ -37,39 +37,40 @@ app.use(bodyParser.json());
 app.set('layout', './layouts/layout')
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
-    verifyAuth(req,res)
+app.get('/', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/index')
 })
 
-app.get('/services', (req, res) => {
-    verifyAuth(req,res)
+app.get('/services', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/services')
 })
 
-app.get('/service/addService', (req, res) => {
-    verifyAuth(req,res)
+app.get('/service/addService', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/addService')
 })
 
 
-app.get('/updates', (req, res) => {
-    verifyAuth(req,res)
+app.get('/updates', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/updates')
 })
 
-app.get('/services/addService', (req, res) => {
-    verifyAuth(req,res)
+app.get('/services/addService', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/addService')
+
 })
 
-app.get('/services/editService', (req, res) => {
-    verifyAuth(req,res)
+app.get('/services/editService', async (req, res) => {
+    await verifyAuth(req,res)
     res.render('pages/editService')
 })
 
 //Auth
-app.get('/login', (req, res) => {
+app.get('/login', async (req, res) => {
     let sess = req.session
     if(sess.user == null || sess.user == ""){
         res.render('pages/login')
@@ -77,7 +78,7 @@ app.get('/login', (req, res) => {
         res.redirect('/')
     }
 })
-app.get('/signup', (req, res) => {
+app.get('/signup', async (req, res) => {
     let sess = req.session
     if(sess.user == null || sess.user == ""){
         res.render('pages/signup')
@@ -86,7 +87,7 @@ app.get('/signup', (req, res) => {
     }
 })
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     login(req, res)
 })
 app.post('/signup', async (req, res) => {
