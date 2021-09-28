@@ -1,3 +1,183 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-    <h1 class="text-2xl font-semibold text-gray-900">Services</h1>
+<div class="pb-5 border-b border-gray-200 sm:flex justify-between w-full">
+    <div class="max-w-7xl flex justify-start">
+        <h1 class="text-2xl font-semibold text-gray-900">Liste des services</h1>
+    </div>
+    <div class="mt-3 flex sm:mt-0 sm:ml-4 justify-end">
+        <a href="/service/addService" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+            </svg>
+            Ajouter un service
+        </a>
+    </div>
 </div>
+
+<div class="bg-white shadow overflow-hidden sm:rounded-md">
+    <ul role="list" class="divide-y divide-gray-200">
+        <li>
+            <a href="#" class="block hover:bg-gray-50">
+                <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://pristis.fr/services/assets/img/web.png" alt="">
+                        </div>
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-blue-600 truncate">Site vitrine CV</p>
+                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span class="truncate">&nbsp; Apache • Fail2Ban • PHP • SFTP</span>
+                                </p>
+                            </div>
+                            <div class="hidden md:block">
+                                <div>
+                                    <p class="text-sm text-gray-900">
+                                        Dernier reboot le :
+                                        <time datetime="2020-01-07" class="italic">27 Septembre 2021 à 05h40    </time>
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                                        <span class="text-green-500" style="font-size:3rem">•</span>
+                                        <span class="pt-1.5 ml-2">Status : Actif</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="block hover:bg-gray-50">
+                <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://pristis.fr/services/assets/img/web.png" alt="">
+                        </div>
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-blue-600 truncate">Site E-Commerce Boutique</p>
+                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span class="truncate">&nbsp; Apache • Fail2Ban • PHP • SFTP</span>
+                                </p>
+                            </div>
+                            <div class="hidden md:block">
+                                <div>
+                                    <p class="text-sm text-gray-900">
+                                        Dernier reboot le :
+                                        <time datetime="2020-01-07" class="italic">18 Août 2021 à 16h40</time>
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                                        <span class="text-red-500" style="font-size:3rem">•</span>
+                                        <span class="pt-1.5 ml-2">Status : Inactif</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="block hover:bg-gray-50">
+                <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://pristis.fr/services/assets/img/web.png" alt="">
+                        </div>
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-blue-600 truncate">Site To Do List (Entreprise)</p>
+                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span class="truncate">&nbsp; Apache • Fail2Ban • PHP • SFTP</span>
+                                </p>
+                            </div>
+                            <div class="hidden md:block">
+                                <div>
+                                    <p class="text-sm text-gray-900">
+                                        Dernier reboot le :
+                                        <time datetime="2020-01-07" class="italic">28 Août 2021 à 12h39</time>
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                                        <span class="text-green-500" style="font-size:3rem">•</span>
+                                        <span class="pt-1.5 ml-2">Status : Actif</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="#" class="block hover:bg-gray-50">
+                <div class="flex items-center px-4 py-4 sm:px-6">
+                    <div class="min-w-0 flex-1 flex items-center">
+                        <div class="flex-shrink-0">
+                            <img class="h-12 w-12 rounded-full" src="https://pristis.fr/services/assets/img/web.png" alt="">
+                        </div>
+                        <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+                            <div>
+                                <p class="text-sm font-medium text-blue-600 truncate">Site Vitrine Boutique</p>
+                                <p class="mt-2 flex items-center text-sm text-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                    <span class="truncate">&nbsp; Apache • Fail2Ban • PHP • SFTP</span>
+                                </p>
+                            </div>
+                            <div class="hidden md:block">
+                                <div>
+                                    <p class="text-sm text-gray-900">
+                                        Dernier reboot le :
+                                        <time datetime="2020-01-07" class="italic">3 Juillet 2021 à 8h04</time>
+                                    </p>
+                                    <p class="mt-2 flex items-center text-sm text-gray-500">
+                                        <span class="text-yellow-500" style="font-size:3rem">•</span>
+                                        <span class="pt-1.5 ml-2">Status : Maintenance</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+
