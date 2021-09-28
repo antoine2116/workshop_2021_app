@@ -38,33 +38,33 @@ app.set('layout', './layouts/layout')
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/index')
 })
 
 app.get('/services', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/services')
 })
 
 app.get('/service/addService', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/addService')
 })
 
 
 app.get('/updates', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/updates')
 })
 
 app.get('/services/addService', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/addService')
 })
 
 app.get('/services/editService', (req, res) => {
-    //verifyAuth(req,res)
+    verifyAuth(req,res)
     res.render('pages/editService')
 })
 
