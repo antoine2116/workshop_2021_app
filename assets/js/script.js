@@ -12,20 +12,28 @@ function attribuateForm(){
                 type    : form.attr('method'),
                 data    : data,
                 success : function( response ) {
-                    console.log(response);
-                    if(response.code == 200){
-                        window.location.replace("/");
+                    if(response.callback){
+                        console.log('Do', response.callback)
+                        window[response.callback](response);
+                    }else{
+                        if(response.code == 200){
+                            window.location.replace("/");
+                        }
                     }
-                    if(response.code == 201){
-                        window.location.replace("/m/"+response.server);
-                    }
+
                 }
             });
         });
     })
 }
 
-
+function isJson(str) {
+    try {
+        return JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+}
 function getFormJSON(form){
 
     let isFormValid = true;
@@ -107,3 +115,109 @@ function getFormJSON(form){
         }
     }
 }
+
+let userbtn = document.querySelector('#user-menu-button')
+if(userbtn){
+    $('#user-menu-button').click(function() {
+        setTimeout(function() { $('#userDrop').removeClass('hidden') }, 10)
+    });
+
+    $('body:not(#userDrop)').click(function() {
+        $('#userDrop').addClass('hidden');
+    });
+
+    $('#disco').click(() => {
+        $.post("/disconnect",
+            {
+                action: "Disconnect",
+            },
+            function(data, status){
+                console.log("Data: " + data.success + "\nStatus: " + status);
+                if(data.success){
+                    window.location.replace('/login')
+                }else{
+                    alert("Il semblerait qu'il y ait eu une erreur.")
+                }
+            });
+    });
+
+
+}
+
+let btnDeleteAccount = document.querySelector('#btnDeleteAccount')
+if(btnDeleteAccount){
+    let cancelDeleteAccount = document.querySelector('#cancelDeleteAccount')
+    let modalDeleteAccount = document.querySelector('#modalDeleteAccount')
+
+    btnDeleteAccount.onclick = () => {
+        modalDeleteAccount.classList.remove('hidden')
+    }
+    cancelDeleteAccount.onclick = () => {
+        modalDeleteAccount.classList.add('hidden')
+    }
+}
+
+function authError(info){
+    let error = document.querySelector('#error')
+    if (error) error.innerHTML = info.errorMsg
+}
+
+function userModal(info){
+    console.log("Disp modal")
+    let modal = document.querySelector("#modalResponseChanges")
+    let title = modal.querySelector('#modal-title')
+    let desc = modal.querySelector('#modal-desc')
+    let button = modal.querySelector('#modal-button')
+
+    title.innerHTML = info.title
+    desc.innerHTML = info.desc
+    button.onclick = () => {
+        window.location.href = window.location.href.split( '#' )[0];
+    }
+
+    modal.classList.remove('hidden')
+}
+
+//RGPD
+let dataUsage = document.querySelector("#data-usage")
+if (dataUsage) {
+    let text = dataUsage.querySelector('#text')
+    let revealOrHide = dataUsage.querySelector('#revealText')
+    let accept = dataUsage.querySelector('#btnAcceptPrivacy')
+    let decline = dataUsage.querySelector('#btnDeclinePrivacy')
+
+    revealOrHide.onclick = () => {
+        text.classList.toggle('hidden')
+        revealOrHide.classList.toggle('rotate-180')
+    }
+
+    accept.onclick = () => {
+        $.post("/privacy",
+            {accept: true},
+            function(data, status){
+                console.log("Data: " + data + "\nStatus: " + status);
+                if(data.code == 200){
+                    dataUsage.remove()
+                }else{
+                    alert("Il semblerait qu'il y ait eu une erreur.")
+                }
+            }
+        );
+    }
+    decline.onclick = () => {
+        $.post("/privacy",
+            {accept: false},
+            function(data, status){
+                console.log("Data: " + data + "\nStatus: " + status);
+                if(data.code == 200){
+                    dataUsage.remove()
+                }else{
+                    alert("Il semblerait qu'il y ait eu une erreur.")
+                }
+            }
+        );
+    }
+
+
+}
+

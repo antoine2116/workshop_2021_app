@@ -12,16 +12,18 @@ exports.login = async function(req,res){
         where: {
             email
         }
-    }).then(data => {
+    }).then(async (data) => {
         if(data == null){
             res.send({
                 "code":206,
-                "error":"Email does not exist"
+                "error":"Email does not exist",
+                callback:"authError",
+                errorMsg: "L'email saisi n'existe pas"
             });
         }
         let user = data.dataValues
         console.log(user)
-        const comparison = bcrypt.compare(password, user.password)
+        const comparison = await bcrypt.compare(password, user.password)
         if(comparison){
 
             let sess = req.session
@@ -34,53 +36,13 @@ exports.login = async function(req,res){
         }else{
             res.send({
                 "code":204,
-                "error":"Email and password does not match"
+                callback:"authError",
+                errorMsg: "L'email et le mot de passe saisis ne correspondent pas"
             })
         }
 
 
     })
-    console.log('HEEEEE', email)
-/*
-    db.query('SELECT * FROM user WHERE email = ? OR pseudo = ?',[username, username], async function (error, results, fields) {
-        if (error) {
-            res.send({
-                "code":400,
-                "failed":"error occurred",
-                "error" : error
-            })
-        }else{
-            if(results.length >0){
-                const comparison = await bcrypt.compare(password, results[0].password)
-                if(comparison){
-                    let user = {
-                        id: results[0].id,
-                        pseudo: results[0].pseudo,
-                        email: results[0].email,
-                    }
-                    let sess = req.session
-                    sess.user = user
-                    res.send({
-                        code: 200,
-                        success: "login successful",
-                        user: user
-
-                    })
-                }else{
-                    res.send({
-                        "code":204,
-                        "error":"Email and password does not match"
-                    })
-                }
-            } else{
-                res.send({
-                    "code":206,
-                    "error":"Email does not exist"
-                });
-            }
-        }
-    });
-*/
 
 }
 
@@ -110,7 +72,7 @@ exports.signup = async function (req, res){
                 "code":400,
                 "failed":"error occurred",
                 "error" : error,
-                "callback" : "displayError",
+                "callback" : "authError",
                 "errorMsg" : "Votre compte n'a pas pu etre créé, veuillez réessayer plus tard."
             })
         })
@@ -121,15 +83,15 @@ exports.signup = async function (req, res){
             res.send({
                 "code":206,
                 "error":"Some inputs are empty",
-                callback: "inputEmpty",
-                errorMsg: noInputsEmpty
+                callback: "authError",
+                errorMsg: "Merci de remplir les champs nécessaires"
             });
         }else{
             res.send({
                 "code":206,
                 "error":"Passwords doesn't match",
-                callback: "passwordMatch",
-                errorMsg: null
+                callback: "authError",
+                errorMsg: "Les mots de passe saisis ne correspondent pas"
             });
         }
 
@@ -150,5 +112,108 @@ exports.verifyAuth = async function(req, res){
 
 exports.disconnect = async function(req, res){
     delete req.session.user;
-    res.redirect('/login')
+    res.send({
+        code: 200,
+        success: req.session.user == null,
+    })
+}
+
+exports.modifyAccount = async function(req, res){
+    let id = req.body.idUser
+    let email = req.body.email;
+    let password = req.body.password;
+    let cpassword = req.body.cpassword;
+    let deleteUser = req.body.deleteUser
+    let response = null
+    if(email){
+        await Users.update({ email }, {
+            where: {
+                id
+            }
+        }).then(data => {
+            console.log(data)
+            response = {
+                code: 200,
+                callback:'userModal',
+                title: "modification email",
+                desc: "Votre email a bien été modifié. Votre nouvel email de contact et de connexion est donc : \n<b>"+email+"</b>",
+                data
+            }
+        }).catch(err => {
+            console.log(err)
+            response = {
+                code: 400,
+                callback:'userModal',
+                title: "modification email",
+                desc: "Il semblerait qu'il y ait eu une erreur dans la modification de votre email. Veuillez réessayer plus tard."
+            }
+        });
+    }else if (password){
+        let noInputsEmpty =  password == "" ? "password" : "" || cpassword == "" ? "cpassword" : ""
+        if(password == cpassword && noInputsEmpty == ""){
+            const salt = bcrypt.genSaltSync(saltRounds);
+            const hash = bcrypt.hashSync(password, salt);
+
+            await Users.update({ password: hash }, {
+                where: {
+                    id
+                }
+            }).then(data => {
+                console.log(data)
+                response = {
+                    code: 200,
+                    callback:'userModal',
+                    title: "modification mot de passe",
+                    desc: "Votre mot de passe a bien été modifié."
+
+                }
+            }).catch(err => {
+                console.log(err)
+                response = {
+                    code: 400,
+                    callback:'userModal',
+                    title: "modification email",
+                    desc: "Il semblerait qu'il y ait eu une erreur dans la modification de votre mot de passe. Veuillez réessayer plus tard."
+
+                }
+            });
+
+        }else{
+            console.log({
+                code: 400,
+                error: "Passwords don't match"
+            })
+            response = {
+                code: 401,
+                callback:'userModal',
+                title: "Les mots de passe ne concordent pas ou sont vides",
+                desc: "Il semblerait qu'il y ait eu une erreur dans la modification de votre mot de passe. Veuillez réessayer plus tard."
+
+            }
+        }
+    }else if(deleteUser){
+        await Users.destroy({
+            where: {
+                id
+            }
+        }).then(data => {
+            console.log(data)
+            delete req.session.user;
+            response = {
+                code: 200,
+                callback:'userModal',
+                title: "Suppression de compte",
+                desc: "Votre compte a bien été supprimé."
+            }
+        }).catch(err => {
+            console.log(err)
+            response = {
+                code: 400,
+                callback:'userModal',
+                title: "Suppression de compte",
+                desc: "Il semblerait qu'il y ait eu une erreur dans la suppression de votre compte. Veuillez réessayer plus tard."
+            }
+        });;
+    }
+    res.send(response)
 }

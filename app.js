@@ -6,7 +6,7 @@ let session = require('express-session')
 let bodyParser = require('body-parser');
 const cors = require("cors");
 
-let { login, signup, verifyAuth} = require('./controllers/AuthController.js');
+let { login, signup, verifyAuth, disconnect, modifyAccount} = require('./controllers/AuthController.js');
 
 app.use('/assets', express.static('assets'))
 
@@ -35,45 +35,64 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.set('layout', './layouts/layout')
+app.set("layout pages/login", false);
+app.set("layout pages/signup", false);
 app.set('view engine', 'ejs')
 
 app.get('/', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/index')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/index', {privacyPolicy})
 })
 
 app.get('/services', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/services')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/services', {privacyPolicy})
 })
 
 app.get('/service/addService', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/addService')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/addService', {privacyPolicy})
 })
 
 
 app.get('/updates', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/updates')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/updates', {privacyPolicy})
 })
 
 app.get('/services/addService', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/addService')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/addService', {privacyPolicy})
 
 })
 
 app.get('/services/editService', async (req, res) => {
     await verifyAuth(req,res)
-    res.render('pages/editService')
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/editService', {privacyPolicy})
+})
+
+app.get('/account', async (req, res) => {
+    await verifyAuth(req,res)
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/profile', {confirm: false, user:req.session.user, info: null, privacyPolicy})
+})
+app.post('/account', async (req, res) => {
+    await verifyAuth(req,res)
+    modifyAccount(req, res)
+
 })
 
 //Auth
 app.get('/login', async (req, res) => {
     let sess = req.session
     if(sess.user == null || sess.user == ""){
-        res.render('pages/login')
+        res.render('pages/login', {layout: 'pages/login'})
     }else{
         res.redirect('/')
     }
@@ -81,7 +100,7 @@ app.get('/login', async (req, res) => {
 app.get('/signup', async (req, res) => {
     let sess = req.session
     if(sess.user == null || sess.user == ""){
-        res.render('pages/signup')
+        res.render('pages/signup', {layout: 'pages/signup'})
     }else{
         res.redirect('/')
     }
@@ -93,6 +112,16 @@ app.post('/login', async (req, res) => {
 app.post('/signup', async (req, res) => {
     signup(req, res)
 })
+
+app.post('/disconnect', async (req, res) => {
+    disconnect(req, res)
+})
+app.post('/privacy', (req, res) => {
+    req.session.user.privacyPolicy = true;
+    res.send({
+        "code":200
+    });
+});
 
 
 
@@ -109,3 +138,4 @@ db.sequelize.sync();
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
+
