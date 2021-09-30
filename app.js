@@ -5,6 +5,8 @@ const port = 3000
 let session = require('express-session')
 let bodyParser = require('body-parser');
 const cors = require("cors");
+const https = require('https');
+const http = require('http');
 
 let { login, signup, verifyAuth, disconnect, modifyAccount} = require('./controllers/AuthController.js');
 
@@ -135,7 +137,21 @@ db.sequelize.sync();
    console.log("Drop and re-sync db.");
  });*/
 
-app.listen(port, () => {
+/*app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+})*/
+
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer({
+    key: fs.readFileSync('/cert/key.pem'),
+    cert: fs.readFileSync('/cert/cert.pem'),
+}, app);
+
+httpServer.listen(80, () => {
+    console.log('HTTP Server running on port 80');
+});
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+});
 
