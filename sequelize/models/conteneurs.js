@@ -5,14 +5,10 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        libelle: {
+        type: {
             type: Sequelize.STRING(80),
             allowNull: false
-        },
-        structure: {
-            type: Sequelize.JSON,
-            allowNull: false
-        },
+        }
     });
 
     return Conteneur;

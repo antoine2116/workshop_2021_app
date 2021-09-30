@@ -5,10 +5,13 @@ const port = 3000
 let session = require('express-session')
 let bodyParser = require('body-parser');
 const cors = require("cors");
+
 const https = require('https');
 const http = require('http');
 
 let { login, signup, verifyAuth, disconnect, modifyAccount} = require('./controllers/AuthController.js');
+
+let { getListeServices, createService, getServiceById, deleteService } = require('./controllers/ServicesController.js');
 
 app.use('/assets', express.static('assets'))
 
@@ -43,40 +46,55 @@ app.set('view engine', 'ejs')
 
 app.get('/', async (req, res) => {
     await verifyAuth(req,res)
+    let services = await getListeServices(req.session.user.id);
     let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/index', {privacyPolicy})
+    res.render('pages/index', {services : services, privacyPolicy})
 })
 
 app.get('/services', async (req, res) => {
     await verifyAuth(req,res)
+    let services = await getListeServices(req.session.user.id);
     let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/services', {privacyPolicy})
+    res.render('pages/services', {services : services, privacyPolicy})
 })
 
 app.get('/service/addService', async (req, res) => {
     await verifyAuth(req,res)
     let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/addService', {privacyPolicy})
+    let userid = req.session.user.id;
+    res.render('pages/addService', {privacyPolicy, userid })
 })
 
 
 app.get('/updates', async (req, res) => {
     await verifyAuth(req,res)
     let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/updates', {privacyPolicy})
+    let services = await getListeServices(req.session.user.id)
+    res.render('pages/updates', {services : services, privacyPolicy})
 })
+
+
+
+
+
 
 app.get('/services/addService', async (req, res) => {
     await verifyAuth(req,res)
-    let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/addService', {privacyPolicy})
-
+    let privacyPolicy = req.session.user.privacyPolicy;
+    res.render('pages/services', {privacyPolicy})
 })
+
+
+
+
+
+
 
 app.get('/services/editService', async (req, res) => {
     await verifyAuth(req,res)
+    let service = await getServiceById(req.query.id);
     let privacyPolicy = req.session.user.privacyPolicy
-    res.render('pages/editService', {privacyPolicy})
+    res.render('pages/editService', {service : service, privacyPolicy})
 })
 
 app.get('/account', async (req, res) => {
@@ -87,8 +105,12 @@ app.get('/account', async (req, res) => {
 app.post('/account', async (req, res) => {
     await verifyAuth(req,res)
     modifyAccount(req, res)
-
 })
+
+app.get('/getServiceById', async (req, res) => {
+    let service = await getServiceById(req.query.id);
+    res.send(service);
+});
 
 //Auth
 app.get('/login', async (req, res) => {
@@ -115,6 +137,13 @@ app.post('/signup', async (req, res) => {
     signup(req, res)
 })
 
+app.post('/createService', async (req, res) => {
+    await verifyAuth(req,res)
+    let service = await createService(req.body);
+    let privacyPolicy = req.session.user.privacyPolicy
+    res.render('pages/editService', {service: service, privacyPolicy})
+});
+
 app.post('/disconnect', async (req, res) => {
     disconnect(req, res)
 })
@@ -125,33 +154,38 @@ app.post('/privacy', (req, res) => {
     });
 });
 
+app.get('/deleteService', async (req, res) => {
+    let id = req.query.id;
+    await deleteService(id);
+    setTimeout(function() { return 0 }, 350)
+    res.redirect('/services');
+});
+
 
 
 // Database sequelize
 const db = require('./sequelize');
 // Sync database
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // reset datatable
- /*db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
    console.log("Drop and re-sync db.");
- });*/
+ });
 
-/*app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})*/
+// // HTTPS
+var privateKey  = fs.readFileSync('/cert/key.key', 'utf8');
+var certificate = fs.readFileSync('/cert/cert.cert', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
 
-const httpServer = http.createServer(app);
-const httpsServer = https.createServer({
-    key: fs.readFileSync('/cert/key.pem'),
-    cert: fs.readFileSync('/cert/cert.pem'),
-}, app);
-
-httpServer.listen(80, () => {
-    console.log('HTTP Server running on port 80');
-});
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
 
 httpsServer.listen(443, () => {
     console.log('HTTPS Server running on port 443');
 });
 
+// DEV
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`)
+// })

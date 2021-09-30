@@ -20,7 +20,7 @@
             <div class="border border-gray-200 rounded-lg shadow-md divide-y divide-gray-200 bg-white">
                 <div class="p-6">
                     <h2 class="text-lg leading-6 font-medium text-gray-900">Serveur base de données</h2>
-                    <p class="mt-4 text-sm text-gray-500">Un serveur de base de données permettant d'héberger toutes vos données</p>
+                    <p class="mt-4 text-sm text-gray-500">Un serveur de base de données sécurisé permettant d'héberger toutes vos données</p>
                     <p class="mt-12 text-center">
                         <span class="text-4xl font-extrabold text-gray-900">8€</span>
                         <span class="text-base font-medium text-gray-500">/mois</span>
@@ -45,139 +45,109 @@
 </fieldset>
 
 <fieldset id="fs-difficulty" style="display:none">
-    <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-26">
-        <div class="bg-white shadow overflow-hidden sm:rounded-md p-5">
-            <form class="space-y-8 divide-y divide-gray-200">
-                <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
-                    <div>
+    <form action="/createService" method="post">
+        <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-26">
+            <div class="bg-white shadow overflow-hidden sm:rounded-md p-5">
+                <form class="space-y-8 divide-y divide-gray-200">
+                    <input hidden name="userid" value="<%= userid %>" />
+                    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div>
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Informations générales
-                            </h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                Remplissez les informations générales concernant votre serveur
-                            </p>
-                        </div>
-
-                        <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Nom du service
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <input type="text" name="name" id="name" class="flex-1 block w-full focus:ring-gray-500 focus:border-gray-500 min-w-0 rounded sm:text-sm border-gray-300">
-                                    </div>
-                                </div>
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    Informations générales
+                                </h3>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                    Remplissez les informations générales concernant votre serveur
+                                </p>
                             </div>
 
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Autre 1
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <input type="text" name="name" id="name" class="flex-1 block w-full focus:ring-gray-500 focus:border-gray-500 min-w-0 rounded sm:text-sm border-gray-300">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5">
-                                <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Autre 2
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <input type="text" name="name" id="name" class="flex-1 block w-full focus:ring-gray-500 focus:border-gray-500 min-w-0 rounded sm:text-sm border-gray-300">
+                            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Nom du service
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div class="max-w-lg flex rounded-md shadow-sm">
+                                            <input type="text" name="nomService" id="nomService" class="flex-1 block w-full focus:ring-gray-500 focus:border-gray-500 min-w-0 rounded sm:text-sm border-gray-300">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="form-avance" class="pt-8 space-y-6 sm:pt-10 sm:space-y-5 border-0" style="display:none">
-                    <div>
+                    <div id="form-avance" class="pt-8 space-y-6 sm:pt-10 sm:space-y-5 border-0" style="display:none">
                         <div>
-                            <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                Avancé
-                            </h3>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                Remplissez les informations avancées
-                            </p>
-                        </div>
+                            <div>
+                                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                                    Avancé
+                                </h3>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                                    Remplissez les informations avancées
+                                </p>
+                            </div>
 
-                        <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Select 1
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <select id="select3" name="select3" class="max-w-lg block focus:ring-gray-500 focus:border-gray-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            <option></option>
-                                        </select>
+                            <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
+                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="nomDomaine" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Nom de domaine
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div class="max-w-lg flex rounded-md shadow-sm">
+                                    <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                                      https://
+                                    </span>
+                                            <input type="text" name="nomDomaine" id="nomDomaine" autocomplete="nomDomaine" class="flex-1 block w-full focus:ring-gray-500 focus:border-gray-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                                    <label for="versionPhp" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
+                                        Version de PHP
+                                    </label>
+                                    <div class="mt-1 sm:mt-0 sm:col-span-2">
+                                        <div class="max-w-lg flex rounded-md shadow-sm">
+                                            <select id="versionPhp" name="versionPhp" class="max-w-lg block focus:ring-gray-500 focus:border-gray-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                <option value="8.0">PHP 8.0</option>
+                                                <option value="7.0">PHP 7.0</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                                <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Select 2
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <select id="select3" name="select3" class="max-w-lg block focus:ring-gray-500 focus:border-gray-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:pt-5">
-                                <label for="username" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-                                    Select 3
-                                </label>
-                                <div class="mt-1 sm:mt-0 sm:col-span-2">
-                                    <div class="max-w-lg flex rounded-md shadow-sm">
-                                        <select id="select3" name="select3" class="max-w-lg block focus:ring-gray-500 focus:border-gray-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
 
-                <div class="pt-5">
-                    <div class="flex justify-start">
-                        <button id="btnAvance" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                            </svg>
-                            Afficher les options avancées
-                        </button>
+                    <div class="pt-5">
+                        <div class="flex justify-start">
+                            <button id="btnAvance" type="button" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                </svg>
+                                Afficher les options avancées
+                            </button>
 
-                        <button id="btnMoins" type="button" style="display:none" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            Afficher moins d'options
-                        </button>
+                            <button id="btnMoins" type="button" style="display:none" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                Afficher moins d'options
+                            </button>
 
+                        </div>
+                        <div class="flex justify-end">
+                            <button id="btnRetour" type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                Retour
+                            </button>
+                            <button id="btnSave" type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                Enregistrer
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex justify-end">
-                        <button id="btnRetour" type="button" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            Retour
-                        </button>
-                        <button id="btnSave" type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                            Enregistrer
-                        </button>
-                    </div>
-                </div>
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
+    </form>
 </fieldset>
+
 
 <script>
     jQuery(function () {

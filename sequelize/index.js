@@ -24,8 +24,7 @@ db.conteneur = require("../sequelize/models/conteneurs")(sequelize, Sequelize);
 db.utilisateur = require("../sequelize/models/users")(sequelize, Sequelize);
 db.conteneur_user = require("../sequelize/models/conteneur_user")(sequelize, Sequelize);
 
-// Relation M:N => conteneur_user
-db.utilisateur.belongsToMany(db.conteneur, { through: db.conteneur_user });
-db.conteneur.belongsToMany(db.utilisateur, { through: db.conteneur_user });
+db.utilisateur.belongsToMany(db.conteneur, { through: {model : db.conteneur_user, unique: false} });
+db.conteneur.belongsToMany(db.utilisateur, { through: {model : db.conteneur_user, unique: false} });
 
 module.exports = db;

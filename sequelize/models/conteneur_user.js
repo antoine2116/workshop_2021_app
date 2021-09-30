@@ -5,14 +5,22 @@ module.exports = (sequelize, Sequelize) => {
             autoIncrement: true,
             primaryKey: true
         },
-        libelle: {
+        nom: {
             type: Sequelize.STRING(80),
             allowNull: false
         },
-        params: {
-            type: Sequelize.JSON,
-            allowNull: false
+        domaine: {
+            type: Sequelize.STRING(80),
+            allowNull: true
         },
+        version: {
+            type: Sequelize.STRING(80),
+            allowNull: true
+        },
+        port: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        }
     },{ timestamps: true });
 
     return ConteneurUser;
