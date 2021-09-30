@@ -20,6 +20,14 @@ module.exports = (sequelize, Sequelize) => {
         port: {
             type: Sequelize.INTEGER,
             allowNull: false
+        },
+        userftp: {
+            type: Sequelize.STRING(255),
+            allowNull: true
+        },
+        mdpftp: {
+            type: Sequelize.STRING(255),
+            allowNull: true
         }
     },{ timestamps: true });
 

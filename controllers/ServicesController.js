@@ -20,7 +20,9 @@ exports.createService = async function(formData) {
             CONTAINER_NAME: formData.nomService,
             CONTAINER_IMAGE: formData.versionPhp == '8.0' ? 'php:8-apache-buster' : 'php:7-apache-buster',
             PUBLISHED_PORT: port,
-            SITE_NAME: formData.nomDomaine
+            SITE_NAME: formData.nomDomaine,
+            SFTP_USER: formData.userftp,
+            SFTP_MDP: formData.mdpftp,
         }),{
             auth: {
                 username: "jenkins",
@@ -43,6 +45,8 @@ exports.createService = async function(formData) {
         nom: formData.nomService,
         domaine: formData.nomDomaine,
         version: formData.versionPhp,
+        userftp: formData.userftp,
+        mdpftp: formData.mdpftp,
         userId: formData.userid,
         conteneurId: conteneur.id,
         port: port,
