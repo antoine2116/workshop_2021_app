@@ -175,18 +175,18 @@ db.sequelize.sync();
 //  });
 
 // // HTTPS
-// var privateKey  = fs.readFileSync('/cert/key.key', 'utf8');
-// var certificate = fs.readFileSync('/cert/cert.cert', 'utf8');
-// var credentials = {key: privateKey, cert: certificate};
-//
-// var httpServer = http.createServer(app);
-// var httpsServer = https.createServer(credentials, app);
-//
-// httpsServer.listen(443, () => {
-//     console.log('HTTPS Server running on port 443');
-// });
+var privateKey  = fs.readFileSync('/cert/key.key', 'utf8');
+var certificate = fs.readFileSync('/cert/cert.cert', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+});
 
 // DEV
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+// app.listen(port, () => {
+//     console.log(`Example app listening at http://localhost:${port}`)
+// })
