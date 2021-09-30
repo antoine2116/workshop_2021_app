@@ -6,6 +6,7 @@ let session = require('express-session')
 let bodyParser = require('body-parser');
 const cors = require("cors");
 
+var fs = require('fs');
 const https = require('https');
 const http = require('http');
 
